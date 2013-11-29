@@ -7,37 +7,31 @@
 import sys
 import re
 import os
+import csv
 
-def column_extractor(arg):
+def main():
+    arg = 11
+    w = open('/Users/histand/Desktop/outfile.txt','w')
 
-    w = open('/Users/histand/Desktop/outfile.txt','w')    # JORDAN: change this path
-
-    for csvFiles in os.listdir("/Users/histand/Desktop/CSV"): # JORDAN: change this path
-    
+    for csvFiles in os.listdir("/Users/histand/Desktop/CSV"):
         
         argument = 0                    # set to 0 to remove header during first iteration
+        
         if csvFiles.startswith("."):
             continue
-        for y in open('/Users/histand/Desktop/CSV/'+csvFiles,'r'): # JORDAN: change this path
-            
-            z = re.split(',',y )                          # re function to split line
-            column = z[arg]                               # desired column to store   
-            column = column.strip()                       # remove any \n or stuff
+        
+        reader = csv.reader(open('/Users/histand/Desktop/CSV/'+csvFiles,'r'))
+        for row in reader:
             if argument > 1:
+                column = row[arg]                               # desired column to store   
+                column = column.strip()                       # remove any \n or stuff
                 print csvFiles + column
                 w.write(column)                           # write out to file
                 w.write('\n')
             argument = argument + 1    
-
-
    
 
     w.close()                                         # close written file
-    
-def main():
-    arg = input('Please enter column number to extract (column 0 is first column):')
-    
-    column_extractor(arg)
 
 # This is the standard boilerplate that calls the main() function.
 if __name__ == '__main__':
