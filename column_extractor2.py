@@ -10,17 +10,17 @@ import os
 import csv
 
 def main():
-    arg = 11
+    arg = 11        # column to extract
     w = open('/Users/histand/Desktop/outfile.txt','w')
 
-    for csvFiles in os.listdir("/Users/histand/Desktop/CSV"):
+    for csvFiles in os.listdir("/Users/histand/Desktop/Test_Data"):
         
         argument = 0                    # set to 0 to remove header during first iteration
         
         if csvFiles.startswith("."):
             continue
         
-        reader = csv.reader(open('/Users/histand/Desktop/CSV/'+csvFiles,'r'))
+        reader = csv.reader(open('/Users/histand/Desktop/Test_Data/'+csvFiles,'r'))
         for row in reader:
             if argument > 1:
                 column = row[arg]                               # desired column to store   
