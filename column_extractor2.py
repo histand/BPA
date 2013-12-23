@@ -10,7 +10,8 @@ import os
 import csv
 
 def main():
-    arg = 11        # column to extract
+    count=0
+    arg = 22        # column to extract
     w = open('/Users/histand/Desktop/outfile.txt','w')
 
     for csvFiles in os.listdir("/Users/histand/Desktop/Test_Data"):
@@ -23,13 +24,14 @@ def main():
         reader = csv.reader(open('/Users/histand/Desktop/Test_Data/'+csvFiles,'r'))
         for row in reader:
             if argument > 1:
+                count=count+1
                 column = row[arg]                               # desired column to store   
                 column = column.strip()                       # remove any \n or stuff
                 print csvFiles + column
                 w.write(column)                           # write out to file
                 w.write('\n')
             argument = argument + 1    
-   
+    print count
 
     w.close()                                         # close written file
 
